@@ -216,24 +216,6 @@ const ClientMonitor = () => {
             })
     };
 
-    
-
-    // const onRemove = (id) => {
-    //     let temp = {...newTicketStatus}
-
-    //     if (Object.keys(temp).includes(eventLog._id)) {
-    //       temp.remove(eventLog._id)
-    //     } else {
-    //       let date = eventLog.eventDate;
-    //       date = new Date(date)
-    //       console.log(date)
-    //       temp[eventLog._id] = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    //     }
-
-    //     console.log(temp)
-    //     setEventLog(temp)
-    //   }
-
     //logic to change from date format on db to a human readable date
     const getHumanDate = (dateToChange) => {
         const date = new Date(dateToChange)
