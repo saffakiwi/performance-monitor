@@ -10,11 +10,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
+Schema = mongoose.Schema,
+    User = require('./userModel');
+
 const port = 7000
 require('dotenv').config();
 
 //config
-app.use(cors());
+app.use(cors());    
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
 
@@ -34,17 +37,27 @@ connection.once("open", () => {
 
 /*------------------------------------------------------------ User Database (schema, queries) ------------------------------------------------------*/
 
-const userSchema = {
-    first_name: {type: String, required: true},
-    surname: {type: String, required: true},
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-}
+// const userSchema = {
+//     first_name: {type: String, required: true},
+//     surname: {type: String, required: true},
+//     username: {type: String, required: true},
+//     password: {type: String, required: true, bcrypt: true},
+// }
 
-//data model for mongoDB
-const User = mongoose.model("User", userSchema);
+// userSchema.pre("save", function(next) {
+//     if(!this.isModified("password")) {
+//         return next();
+//     }
+//     this.password = bcrypt.hashSync(this.password, 10);
+//     next();
+// });
+
+
+// //data model for mongoDB
+// const User = mongoose.model("User", userSchema);
 
 app.post('/users', (req, res) => {
+
     const newUser = new User({
         _id: req.body.id,
         first_name: req.body.first_name,
