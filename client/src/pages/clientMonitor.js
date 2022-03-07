@@ -280,7 +280,6 @@ const ClientMonitor = () => {
                                     key={eventLog._id}
                                     ref={customerWebsite}
                                     onChange={updateClient}>
-                                    <MenuItem value={null}>Customer Website</MenuItem>
                                     <MenuItem value=''>All</MenuItem>
                                     <MenuItem value="Facebook">Facebook</MenuItem>
                                     <MenuItem value="Azure">Azure</MenuItem>
