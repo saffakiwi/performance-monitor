@@ -58,7 +58,8 @@ app.post('/users', (req, res) => {
 })
 
 app.get("/users", (req, res) => {
-    Event.find()
+    User.find()
+    .then((user) => res.json(user))
 })
 
 
