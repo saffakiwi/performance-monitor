@@ -35,26 +35,7 @@ connection.once("open", () => {
     console.log("MongoDB Atlas is connected");
 });
 
-/*------------------------------------------------------------ User Database (schema, queries) ------------------------------------------------------*/
-
-// const userSchema = {
-//     first_name: {type: String, required: true},
-//     surname: {type: String, required: true},
-//     username: {type: String, required: true},
-//     password: {type: String, required: true, bcrypt: true},
-// }
-
-// userSchema.pre("save", function(next) {
-//     if(!this.isModified("password")) {
-//         return next();
-//     }
-//     this.password = bcrypt.hashSync(this.password, 10);
-//     next();
-// });
-
-
-// //data model for mongoDB
-// const User = mongoose.model("User", userSchema);
+/*------------------------------------------------------------ User Database (queries) ------------------------------------------------------*/
 
 app.post('/users', (req, res) => {
 
