@@ -304,7 +304,7 @@ const ClientMonitor = () => {
                                     <MenuItem value=''>All</MenuItem>
                                     <MenuItem value="w2">W2</MenuItem>
                                     <MenuItem value="w3">VT3</MenuItem>
-                                    <MenuItem value="vt2">VT2</MenuItem>
+                                    <MenuItem value="w5">W5</MenuItem>
                                     <MenuItem value="w6">W6</MenuItem>
                                 </Select>
                             </FormControl>
