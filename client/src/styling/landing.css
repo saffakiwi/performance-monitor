@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.circle1 {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  border: "1px solid";
+  border-radius: "100%";
+  top: "10em";
+  right: "15%";
+  background: "#f8d2ce";
+  border-Color: "#f8d2ce";
+}
+.circle1ripple {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  border: "1px solid";
+  border-radius: "100%";
+  top: 10em;
+  right: 15%;
+  background: "none";
+  border-color: "#ceead6";
+  transform: scale(2);
+  animation-name: rippleAnimation;
+  animation-duration: "1.5s";
+  animation-iteration-count: "infinite";
+}
+.circle2 {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  border: "1px solid";
+  border-radius: "100%";
+  bottom: 10em;
+  left: "5%";
+  background: "#f8d2ce";
+  border-color: "#f8d2ce";
+}
+.circle2ripple {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  border: "1px solid";
+  border-radius: "100%";
+  bottom: 10em;
+  left: "5%";
+  background: "none";
+  border-color: "#ceead6";
+  transform: scale(2);
+  animation-name: "rippleAnimation";
+  animation-duration: "1.5s";
+  animation-iteration-count: "infinite";
+}
+
+@keyframes rippleAnimation {
+  0% {
+    transform: scale(1.5);
+  }
+  70% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
