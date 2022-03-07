@@ -218,7 +218,7 @@ const ClientMonitor = () => {
 
     
 
-    // const handleCheck = (id) => {
+    // const onRemove = (id) => {
     //     let temp = {...newTicketStatus}
 
     //     if (Object.keys(temp).includes(eventLog._id)) {
@@ -264,7 +264,6 @@ const ClientMonitor = () => {
                                     key={eventLog._id} selected="" placeholder="client"
                                     ref={nativeClient}
                                     onChange={updateClient}>
-                                    <MenuItem value="Client" disabled>Client</MenuItem>
                                     <MenuItem value='client'>All</MenuItem>
                                     <MenuItem value='Meta'>Meta</MenuItem>
                                     <MenuItem value='Microsoft'>Microsoft</MenuItem>
