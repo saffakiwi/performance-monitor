@@ -151,11 +151,11 @@ function Events() {
                         onChange={updateClient}>
                         <MenuItem value='client'>All</MenuItem>
                         <MenuItem value='Meta'>Meta</MenuItem>
-                                    <MenuItem value='Microsoft'>Microsoft</MenuItem>
-                                    <MenuItem value='Alphabet'>Alphabet</MenuItem>
-                                    <MenuItem value='Miele'>Miele</MenuItem>
-                                    <MenuItem value='Sonos'>Sonos</MenuItem>
-                                    <MenuItem value='Audi'>Audi</MenuItem>
+                        <MenuItem value='Microsoft'>Microsoft</MenuItem>
+                        <MenuItem value='Alphabet'>Alphabet</MenuItem>
+                        <MenuItem value='Miele'>Miele</MenuItem>
+                        <MenuItem value='Sonos'>Sonos</MenuItem>
+                        <MenuItem value='Audi'>Audi</MenuItem>
                     </Select>
                 </FormControl>
 
