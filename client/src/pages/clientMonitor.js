@@ -298,7 +298,6 @@ const ClientMonitor = () => {
                                 <Select className={classes.select}
                                     ref={server}
                                     onChange={updateClient}>
-                                    <MenuItem value="All" disabled>Server</MenuItem>
                                     <MenuItem value=''>All</MenuItem>
                                     <MenuItem value="w2">W2</MenuItem>
                                     <MenuItem value="w3">VT3</MenuItem>
@@ -312,7 +311,6 @@ const ClientMonitor = () => {
                                 <Select className={classes.select}
                                     ref={environment}
                                     onChange={updateClient} >
-                                    <MenuItem value="All" disabled>Environment</MenuItem>
                                     <MenuItem value=''>All</MenuItem>
                                     <MenuItem value="dev">Dev</MenuItem>
                                     <MenuItem value="production">Production</MenuItem>
@@ -328,7 +326,6 @@ const ClientMonitor = () => {
                                 <Select className={classes.select}
                                     ref={eventType}
                                     onChange={updateClient} >
-                                    <MenuItem value="All" disabled>Event Type</MenuItem>
                                     <MenuItem value=''>All</MenuItem>
                                     <MenuItem value="Info">Info</MenuItem>
                                     <MenuItem value="Performance">Performance</MenuItem>
@@ -341,7 +338,6 @@ const ClientMonitor = () => {
                                 <Select className={classes.select}
                                     ref={system}
                                     onChange={updateClient} >
-                                    <MenuItem value="All" disabled>System</MenuItem>
                                     <MenuItem value=''>All</MenuItem>
                                     <MenuItem value="web">Web</MenuItem>
                                     <MenuItem value="IIS">IIS</MenuItem>
