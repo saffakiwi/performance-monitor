@@ -9,6 +9,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require('bcrypt')
 const app = express();
 Schema = mongoose.Schema,
     User = require('./userModel');
@@ -37,6 +38,7 @@ connection.once("open", () => {
 
 /*------------------------------------------------------------ User Database (queries) ------------------------------------------------------*/
 
+// posts new user information to the database
 app.post('/users', (req, res) => {
 
     const newUser = new User({
@@ -49,12 +51,26 @@ app.post('/users', (req, res) => {
     newUser.save()
         .then((event) => res.json(event))
         .catch((err) => res.status(400).json('Error: ' + err))
-})
+});
 
-app.get("/users", (req, res) => {
-    User.find()
-    .then((user) => res.json(user))
-})
+//get all users
+app.post('/login', async function(req, res) {
+    username = req.body.username,
+    password = req.body.password
+    console.log(username),
+    console.log(password)
+
+    User.findOne({ username: req.body.username })
+        .then(username => {
+            console.log("User from login", username)
+            if (!username) res.sendStatus(204);
+            else {
+                bcrypt.compare(req.body.password, password)
+                    .then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204))
+            }
+        });
+});
+
 
 
 /*------------------------------------------------------------ Event Database (schema, queries) ------------------------------------------------------*/
