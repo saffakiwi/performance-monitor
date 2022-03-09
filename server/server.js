@@ -51,22 +51,32 @@ app.post('/users', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err))
 });
 
-//get all users
+//gets info from frontend - checks if user exists then checks if the password matches the hashed password
 app.post('/login', async function (req, res) {
-    username = req.body.username,
-        password = req.body.password
-    console.log(username),
-        console.log(password)
-
-    User.findOne({ username: req.body.username })
-        .then(username => {
-            console.log("User from login", username)
-            if (!username) res.sendStatus(204);
-            else {
-                bcrypt.compare(req.body.password, password)
-                    .then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204))
+    var {username,password}=req.body
+    if(!username || !password )
+    {
+        return res.status(422).json({error:"Please add all fields"})
+    }
+    User.findOne({username:username})
+    .then((user)=>{
+        if(!user){
+            return res.status(422).json({error:"Invalid Email or password"})
+       }
+        bcrypt.compare(password,user.password)
+        .then(match=>{
+            if(match)
+            {
+                res.json({message:"Login Successfull"})
             }
-        });
+            else{
+                return res.status(422).json({error:"Invalid email or password"})
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    })
 });
 
 /*------------------------------------------------------------ Event Database (schema, queries) ------------------------------------------------------*/
