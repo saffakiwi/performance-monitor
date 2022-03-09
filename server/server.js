@@ -13,15 +13,13 @@ const bcrypt = require('bcrypt')
 const app = express();
 Schema = mongoose.Schema,
     User = require('./userModel');
-
 const port = 7000
 require('dotenv').config();
 
 //config
-app.use(cors());    
+app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
-
 
 // MongoDb Setup and connection
 const DB_URL = process.env.DB_URL
@@ -54,11 +52,11 @@ app.post('/users', (req, res) => {
 });
 
 //get all users
-app.post('/login', async function(req, res) {
+app.post('/login', async function (req, res) {
     username = req.body.username,
-    password = req.body.password
+        password = req.body.password
     console.log(username),
-    console.log(password)
+        console.log(password)
 
     User.findOne({ username: req.body.username })
         .then(username => {
@@ -71,13 +69,11 @@ app.post('/login', async function(req, res) {
         });
 });
 
-
-
 /*------------------------------------------------------------ Event Database (schema, queries) ------------------------------------------------------*/
 
 //sets schema for the db
 const eventSchema = {
-    clientId: Number, 
+    clientId: Number,
     nativeClient: String,
     customerWebsite: String,
     eventType: String,
@@ -125,7 +121,6 @@ app.post('/eventlog', (req, res) => {
         .then((event) => res.json(event))
         .catch((err) => res.status(400).json('Error: ' + err))
 })
-
 
 //main read route to pull all data from the database. Data also gets filtered through this function which is passed to the front end.
 // Only data that has a ticketStatus of false will be provided to the frontend. A limit of results has also been added. 
@@ -183,7 +178,6 @@ app.put('/update', (req, res) => {
     });
 });
 
-
 //query used in systemEvents on React. Query to find all tickets with a field of high and displays event type, subtype and message.
 // This function also has a filter component that gets passed to the frontend. 
 app.get('/eventlog/severity', async (req, res) => {
@@ -191,7 +185,7 @@ app.get('/eventlog/severity', async (req, res) => {
     var filters = {};
     if (req.query.nativeClient != null && req.query.nativeClient != '') {
         filters.nativeClient = req.query.nativeClient;
-    } 
+    }
     if (req.query.eventType != null && req.query.eventType != '') {
         filters.eventType = req.query.eventType;
     }
@@ -211,7 +205,6 @@ app.get('/eventlog/severity', async (req, res) => {
         .then((event) => res.json(event))
         .catch((err) => res.status(400).json('Error: ' + err))
 });
-
 
 /*------------------------------------------------------------ Connecting to port ------------------------------------------------------*/
 
