@@ -111,6 +111,7 @@ function Events() {
         getEventLog()
     }, []);
 
+    //selects inputs using useRef and then adds it to the url string (access point from server)
     function updateClient(_id) {
         setTimeout(() => {
             var url = 'http://localhost:7000/eventlog/severity?';
@@ -202,12 +203,6 @@ function Events() {
                 </FormControl>
             </Paper>
 
-            {/* <div className={classes.paperEvents}>
-                <Typography className={classes.fbutton}>Client</Typography>
-                <Typography className={classes.fbutton}>Event Type</Typography>
-                <Typography className={classes.fbutton}>Event Subtype</Typography>
-                <Typography className={classes.fbutton}>Event Message</Typography>
-            </div> */}
             <Paper className={classes.pEvents} elevation={0} key={eventLog._id}>
                 {/*creates cards if they have a field of high severity*/}
                 {eventLog.map(eventLog => (

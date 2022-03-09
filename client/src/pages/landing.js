@@ -182,39 +182,34 @@ const useStyles = makeStyles((theme) => ({
 
 const Landing = () => {
 
+    //useState and useRef
     const classes = useStyles();
-    // const history = useHistory()
-    const [loginUser, setLoginUser] = useState({})
     const username = useRef();
     const password = useRef();
-  
-    const [user,setUser] = useState({
+    const [user, setUser] = useState({
         username: " ",
         password: " "
     })
-    
+
+    /*.....................................................login function parameters to get values and send to server.....................................*/
     const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64')
     const onChange = () => {
         setUser(user)
     }
 
-  
+    // const login = () => {
 
-    const login = () => {
-
-        axios.post('http://localhost:7000/login', user, {
-            headers: {
-                'Authorization': `Basic ${token}`
-            }
-        })
-    .then((res) => {
-      setUser(res.data)
-    //   this.props.history.push('/dashboard');
-    }).catch((err) => {
-      console.log(err)
-        });
-      }
-        
+    //     axios.post('http://localhost:7000/login', user, {
+    //         headers: {
+    //             'Authorization': `Basic ${token}`
+    //         }
+    //     }).then((res) => {
+    //         setUser(res.data)
+    //         //   this.props.history.push('/dashboard');
+    //     }).catch((err) => {
+    //         console.log(err)
+    //     });
+    // }
 
     return (
         <div className={classes.topgrid}>
@@ -248,21 +243,21 @@ const Landing = () => {
                                 required
                                 id="outlined-required"
                                 label="Required"
-                                variant="outlined" 
+                                variant="outlined"
                                 ref={username}
-                                onChange={onChange}/>
+                                onChange={onChange} />
                             <Typography className={classes.inputtext}>Password:</Typography>
                             <TextField
                                 id="outlined-required"
                                 variant="outlined"
                                 label="Required"
                                 type="password"
-                                autoComplete="current-password" 
+                                autoComplete="current-password"
                                 ref={password}
-                                onChange={onChange}/>
-                            {/* <Link to="/home" className={classes.links}> */}
-                                <Button onClick={login} variant="contained" color="inherit" className={classes.lbutton}>Login</Button>
-                            {/* </Link> */}
+                                onChange={onChange} />
+                            <Link to="/home" className={classes.links}>
+                                <Button variant="contained" color="inherit" className={classes.lbutton}>Login</Button>
+                            </Link>
                         </div>
                     </Box>
                 </Card>
