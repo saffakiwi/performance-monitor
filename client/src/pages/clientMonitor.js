@@ -435,11 +435,9 @@ const ClientMonitor = () => {
 
                                     <Grid item={true} xs={2}>
                                         <Switch key={eventLog._id}
-                    
                                             onChange={(_id) => handleChange}
                                             inputProps={{ 'aria-label': 'controlled' }}
-                                            onClick={() => updateTask(eventLog._id)}  />
-                                           
+                                            onClick={() => updateTask(eventLog._id)}  /> 
                                         <Typography className={classes.accor2}></Typography>
                                         <Typography className={classes.accor2}>DATE:{getHumanDate(eventLog.eventDate)}</Typography>
                                         <Typography className={classes.accor2} >SEVERITY: <br /> {eventLog.severity}</Typography>
