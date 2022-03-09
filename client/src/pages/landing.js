@@ -183,8 +183,6 @@ const Landing = () => {
 
     //useState and useRef
     const classes = useStyles();
-    const username = useRef();
-    const password = useRef();
     const history = useNavigate();
     const [user, setUser] = useState({
         username: '',
@@ -219,7 +217,6 @@ const Landing = () => {
                 alert("incorrect username or password")
             }
         })
-       
       }
       
     return (
