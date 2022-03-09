@@ -217,7 +217,6 @@ function Events() {
                 ))}
             </Paper>
         </div>
-
     )
 }
 
