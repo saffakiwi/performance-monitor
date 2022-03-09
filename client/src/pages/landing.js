@@ -8,10 +8,14 @@
 
 //imports
 import React from 'react'
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Typography, Card, Button, Divider, Box, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import { Buffer } from 'buffer';
+import { useHistory } from "react-router-dom";
 import '../styling/landing.css';
 
 //Styling
@@ -179,6 +183,38 @@ const useStyles = makeStyles((theme) => ({
 const Landing = () => {
 
     const classes = useStyles();
+    // const history = useHistory()
+    const [loginUser, setLoginUser] = useState({})
+    const username = useRef();
+    const password = useRef();
+  
+    const [user,setUser] = useState({
+        username: " ",
+        password: " "
+    })
+    
+    const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64')
+    const onChange = () => {
+        setUser(user)
+    }
+
+  
+
+    const login = () => {
+
+        axios.post('http://localhost:7000/login', user, {
+            headers: {
+                'Authorization': `Basic ${token}`
+            }
+        })
+    .then((res) => {
+      setUser(res.data)
+    //   this.props.history.push('/dashboard');
+    }).catch((err) => {
+      console.log(err)
+        });
+      }
+        
 
     return (
         <div className={classes.topgrid}>
@@ -212,17 +248,21 @@ const Landing = () => {
                                 required
                                 id="outlined-required"
                                 label="Required"
-                                variant="outlined" />
+                                variant="outlined" 
+                                ref={username}
+                                onChange={onChange}/>
                             <Typography className={classes.inputtext}>Password:</Typography>
                             <TextField
                                 id="outlined-required"
                                 variant="outlined"
                                 label="Required"
                                 type="password"
-                                autoComplete="current-password" />
-                            <Link to="/home" className={classes.links}>
-                                <Button variant="contained" color="inherit" className={classes.lbutton}>Login</Button>
-                            </Link>
+                                autoComplete="current-password" 
+                                ref={password}
+                                onChange={onChange}/>
+                            {/* <Link to="/home" className={classes.links}> */}
+                                <Button onClick={login} variant="contained" color="inherit" className={classes.lbutton}>Login</Button>
+                            {/* </Link> */}
                         </div>
                     </Box>
                 </Card>
