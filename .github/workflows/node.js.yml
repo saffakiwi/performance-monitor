@@ -19,6 +19,3 @@ jobs:
       with: 
         submodules: true
         
-    - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: npm install
