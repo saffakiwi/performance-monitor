@@ -8,15 +8,14 @@
 
 //imports
 import React from 'react'
-import { useState, useRef } from 'react';
+import { useState, useRef, useHistory } from 'react';
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Typography, Card, Button, Divider, Box, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
 import { Buffer } from 'buffer';
-import { useHistory } from "react-router-dom";
 import '../styling/landing.css';
+import axios from 'axios';
 
 //Styling
 const useStyles = makeStyles((theme) => ({
@@ -186,31 +185,43 @@ const Landing = () => {
     const classes = useStyles();
     const username = useRef();
     const password = useRef();
+    const history = useNavigate();
     const [user, setUser] = useState({
-        username: " ",
-        password: " "
+        username: '',
+        password: ''
     })
 
-    /*.....................................................login function parameters to get values and send to server.....................................*/
-    const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64')
-    const onChange = () => {
-        setUser(user)
-    }
+     /*.....................................................login function parameters to get values and send to server.....................................*/
 
-    // const login = () => {
-
-    //     axios.post('http://localhost:7000/login', user, {
-    //         headers: {
-    //             'Authorization': `Basic ${token}`
-    //         }
-    //     }).then((res) => {
-    //         setUser(res.data)
-    //         //   this.props.history.push('/dashboard');
-    //     }).catch((err) => {
-    //         console.log(err)
-    //     });
-    // }
-
+     function handleChange(event) {
+        const {name, value} = event.target;
+    
+        setUser(prevUser => {
+          return {
+            ...prevUser,
+            [name]: value
+          }
+        })
+      }
+     
+      function handleClick(event) {
+        event.preventDefault();
+        const newUser = {
+          username: user.username,
+          password: user.password,
+        }
+       
+        axios.post("http://localhost:7000/login", newUser)
+        .then((res) => {
+            if (res.status === 200) {
+                history('/home')
+            } else {
+                alert("incorrect username or password")
+            }
+        })
+       
+      }
+      
     return (
         <div className={classes.topgrid}>
 
@@ -244,8 +255,9 @@ const Landing = () => {
                                 id="outlined-required"
                                 label="Required"
                                 variant="outlined"
-                                ref={username}
-                                onChange={onChange} />
+                                name = "username"
+                                value={user.username}
+                                onChange={handleChange} />
                             <Typography className={classes.inputtext}>Password:</Typography>
                             <TextField
                                 id="outlined-required"
@@ -253,10 +265,11 @@ const Landing = () => {
                                 label="Required"
                                 type="password"
                                 autoComplete="current-password"
-                                ref={password}
-                                onChange={onChange} />
+                                name = "password"
+                                value={user.password}
+                                onChange={handleChange} />
                             <Link to="/home" className={classes.links}>
-                                <Button variant="contained" color="inherit" className={classes.lbutton}>Login</Button>
+                                <Button variant="contained" color="inherit" onClick={handleClick} className={classes.lbutton}>Login</Button>
                             </Link>
                         </div>
                     </Box>
