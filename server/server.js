@@ -35,7 +35,6 @@ connection.once("open", () => {
 });
 
 /*------------------------------------------------------------ User Database (queries) ------------------------------------------------------*/
-
 // posts new user information to the database
 app.post('/users', (req, res) => {
 
