@@ -11,6 +11,7 @@ import ClientMonitor from './pages/clientMonitor';
 import Home from './pages/home';
 import Landing from './pages/landing';
 
+
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>

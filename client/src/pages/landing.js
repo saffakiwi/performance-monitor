@@ -8,12 +8,11 @@
 
 //imports
 import React from 'react'
-import { useState, useRef, useHistory } from 'react';
+import { useState} from 'react';
 import { motion } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 import { Typography, Card, Button, Divider, Box, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Buffer } from 'buffer';
 import '../styling/landing.css';
 import axios from 'axios';
 
@@ -195,10 +194,8 @@ const Landing = () => {
         const {name, value} = event.target;
     
         setUser(prevUser => {
-          return {
-            ...prevUser,
-            [name]: value
-          }
+          return {...prevUser,
+            [name]: value}
         })
       }
      
@@ -214,6 +211,7 @@ const Landing = () => {
             if (res.status === 200) {
                 history('/home')
             } else {
+                history('/')
                 alert("incorrect username or password")
             }
         })
