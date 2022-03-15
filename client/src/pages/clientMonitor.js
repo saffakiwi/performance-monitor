@@ -132,7 +132,7 @@ const ClientMonitor = () => {
 
     // endpoint to pull all data from db/ used for the search input filter
     useEffect(() => {
-        axios.get("http://localhost:7000/eventlog")
+        axios.get('http://localhost:7000/eventlog?')
             .then((response) => {
                 setEventLog(response.data)
                 console.log(response.data)
@@ -205,14 +205,6 @@ const ClientMonitor = () => {
                 setEventLog(eventLog.map((eventLog) => {
                     return eventLog._id === id ? { id: id, newTicketStatus: newTicketStatus } : eventLog;
                 }))
-                .then(() => {
-                    let temp = {...newTicketStatus}
-
-                        if (Object.keys(temp).includes(eventLog._id)) {
-                          temp.remove(eventLog._id)
-                        }
-                        setEventLog(temp)
-                }, [])
             })
     };
 

@@ -13,7 +13,7 @@ const bcrypt = require('bcrypt')
 const app = express();
 Schema = mongoose.Schema,
     User = require('./userModel');
-const port = 7000
+// const port = 7000
 require('dotenv').config();
 
 //config
@@ -47,7 +47,7 @@ app.post('/users', (req, res) => {
     })
     newUser.save()
         .then((event) => res.json(event))
-        .catch((err) => res.status(400).json('Error: ' + err))
+        .catch((err) => res.status(400).json(console.log('Error: ' + err)))
 });
 
 //gets info from frontend - checks if user exists then checks if the password matches the hashed password
@@ -60,7 +60,7 @@ app.post('/login', async function (req, res) {
     User.findOne({username:username})
     .then((user)=>{
         if(!user){
-            return res.status(422).json({error:"Invalid Email or password"})
+            return res.status(422).json(console.log({error:"Invalid Email or password"}))
        }
         bcrypt.compare(password,user.password)
         .then(match=>{
@@ -69,7 +69,7 @@ app.post('/login', async function (req, res) {
                 res.json({message:"Login Successfull"})
             }
             else{
-                return res.status(422).json({error:"Invalid email or password"})
+                return res.status(422).json(console.log({error:"Invalid Email or password"}))
             }
         })
         .catch((err)=>{
@@ -163,6 +163,7 @@ app.get('/eventlog', async (req, res) => {
         select(
             '_id nativeClient customerWebsite eventType eventSubType server system environment eventMessage eventDate webUrl severity')
         .then((event) => res.json(event))
+        .catch(("Error" + err))
 })
 
 //below function receives put request from the frontend to update the ticketStatus field on the database to true. 
@@ -218,6 +219,6 @@ app.get('/eventlog/severity', async (req, res) => {
 /*------------------------------------------------------------ Connecting to port ------------------------------------------------------*/
 
 //port listen function
-app.listen(port, function () {
-    console.log("server running on port 7000")
+app.listen(process.env.PORT, function () {
+    console.log("Server listening on port")
 }) 
